@@ -20,8 +20,9 @@ from hparams import hparams
 
 def preprocess(mod, in_dir, out_root, num_workers):
     os.makedirs(out_dir, exist_ok=True)
-    metadata = mod.build_from_path(in_dir, out_dir, num_workers, tqdm=tqdm)
-    write_metadata(metadata, out_dir)
+    mod.build_from_path(in_dir, out_dir, num_workers, tqdm=tqdm)
+    # metadata = mod.build_from_path(in_dir, out_dir, num_workers, tqdm=tqdm)
+    # write_metadata(metadata, out_dir)
 
 
 def write_metadata(metadata, out_dir):
@@ -55,6 +56,6 @@ if __name__ == "__main__":
 
     print("Sampling frequency: {}".format(hparams.sample_rate))
 
-    assert name in ["cmu_arctic", "ljspeech", "librivox", ]
+    assert name in ["cmu_arctic", "ljspeech", "librivox", "speechcommands"]
     mod = importlib.import_module(name)
     preprocess(mod, in_dir, out_dir, num_workers)
