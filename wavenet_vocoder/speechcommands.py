@@ -16,11 +16,11 @@ from hparams import hparams
 
 def build_from_path(in_dir, out_dir, num_workers=1, tqdm=lambda x: x):
     executor = ProcessPoolExecutor(max_workers=num_workers)
-    futures = []
 
     labels = os.listdir(in_dir)
     for label in tqdm(labels):
         mel_vectors = []
+        futures = []
 
         wavfiles = [in_dir + label + '/' + wavfile for wavfile in os.listdir(in_dir + label)]
         for wavfile in wavfiles:
