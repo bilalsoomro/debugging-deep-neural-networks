@@ -104,7 +104,7 @@ def main():
     y_test = np.load('features/full_test_y.npy')
 
 
-    # shuffle the data
+    # shuffle the data (Use different random state to train separate classifier)
     X_train, y_train = shuffle(X_train, y_train, random_state=0)
     X_valid, y_valid = shuffle(X_train, y_train, random_state=0)
     X_test, y_test = shuffle(X_train, y_train, random_state=0)
@@ -127,6 +127,8 @@ def main():
     history1 = model.fit(X_train, y_train_hot, epochs=50, verbose=1, validation_data=(X_valid, y_valid_hot))
     model.save('models/speech_classifier_model.h5')
     model.save_weights('models/speech_classifier_weights.h5')
+    # model.save('models/speech_classifier_model_2.h5')
+    # model.save_weights('models/speech_classifier_weights_2.h5')
 
     if not os.path.exists('figures'):
         os.makedirs('figures')
@@ -138,6 +140,7 @@ def main():
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Valid'], loc='upper right')
     plt.savefig('figures/speech_classifer_training_curve.png', bbox_inches='tight')
+    # plt.savefig('figures/speech_classifer_training_curve_2.png', bbox_inches='tight')
     plt.clf()
 
     plt.plot(history1.history['loss'])
@@ -147,6 +150,7 @@ def main():
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Valid'], loc='upper right')
     plt.savefig('figures/speech_classifer_loss_curve.png', bbox_inches='tight')
+    # plt.savefig('figures/speech_classifer_loss_curve_2.png', bbox_inches='tight')
 
 
     acc = model.evaluate(X_test, y_test_hot)
