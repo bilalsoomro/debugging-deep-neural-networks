@@ -136,8 +136,8 @@ def main():
     plt.title('Model Accuracy')
     plt.ylabel('Accuracy')
     plt.xlabel('Epoch')
-    plt.legend(['Train', 'Validation'], loc='upper right')
-    plt.savefig('figures/model_training_curve.png', bbox_inches='tight')
+    plt.legend(['Train', 'Valid'], loc='upper right')
+    plt.savefig('figures/speech_classifer_training_curve.png', bbox_inches='tight')
     plt.clf()
 
     plt.plot(history1.history['loss'])
@@ -145,8 +145,8 @@ def main():
     plt.title('Model Loss')
     plt.ylabel('Loss')
     plt.xlabel('Epoch')
-    plt.legend(['Train', 'Validation'], loc='upper right')
-    plt.savefig('figures/model_loss_curve.png', bbox_inches='tight')
+    plt.legend(['Train', 'Valid'], loc='upper right')
+    plt.savefig('figures/speech_classifer_loss_curve.png', bbox_inches='tight')
 
 
     acc = model.evaluate(X_test, y_test_hot)
