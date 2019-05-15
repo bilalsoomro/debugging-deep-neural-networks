@@ -11,7 +11,7 @@ config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 set_session(tf.Session(config=config))
 
-DATA_PATH = '../dataset/training/'
+DATA_PATH = '../../dataset/training/'
 
 # Maximizing input based on https://blog.keras.io/how-convolutional-neural-networks-see-the-world.html
 def maximizeInput(iterate, selected_input):
@@ -201,8 +201,8 @@ def init_models(autoencoder_weights, classifier_weights):
 
 def main():
     # Load model
-    full_model, decoder_model = init_models('../models/autoencoder_weights.h5', '../models/speech_classifier_weights.h5')
-    second_model = load_model('../models/speech_classifier_model_2.h5')
+    full_model, decoder_model = init_models('../../models/autoencoder_weights.h5', '../../models/speech_classifier_weights.h5')
+    second_model = load_model('../../models/speech_classifier_model_2.h5')
 
     classes = os.listdir(DATA_PATH)
 
