@@ -204,17 +204,21 @@ def plot_encoded_decoded_samples(encoder, decoder, x_test):
 def main():
     # load up training, validation and testing data
     # X_train, _ = get_x_y('features/training/')
+    # X_valid, _ = get_x_y('features/validation/')
     # X_test, _ = get_x_y('features/testing/')
 
     # Save the features after combining as that steps takes time
     # np.save('features/full_train_x.npy', X_train)
+    # np.save('features/full_valid_x.npy', X_valid)
     # np.save('features/full_test_x.npy', X_test)
 
     # Loading the features
     X_train = np.load('features/full_train_x.npy')
+    X_valid = np.load('features/full_valid_x.npy')
     X_test = np.load('features/full_test_x.npy')
 
     X_train = X_train.reshape(X_train.shape[0], 90, 80, 1)
+    X_valid = X_valid.reshape(X_valid.shape[0], 90, 80, 1)
     X_test = X_test.reshape(X_test.shape[0], 90, 80, 1)
 
     encoder, decoder, autoencoder = create_models()
@@ -223,9 +227,16 @@ def main():
         os.makedirs('models')
 
     autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
-    history1 = autoencoder.fit(X_train, X_train, epochs=50, validation_data=(X_test, X_test))
+    history1 = autoencoder.fit(X_train, X_train, epochs=50, validation_data=(X_valid, X_valid))
     autoencoder.save('models/autoencoder.h5')
     autoencoder.save_weights('models/autoencoder_weights.h5')
+
+    encoded_features = []
+    for i in range(X_test.shape[0]):
+        encoded_utterance = encoder.predict(np.expand_dims(X_test[i], 0))
+        encoded_features.append(encoded_utterance)
+
+    np.save('features/full_test_x_encoded.npy', encoded_features)
 
     if not os.path.exists('figures'):
         os.makedirs('figures')
@@ -235,14 +246,14 @@ def main():
     plt.title('Model Loss')
     plt.ylabel('Loss')
     plt.xlabel('Epoch')
-    plt.legend(['Train', 'Test'], loc='upper right')
+    plt.legend(['Train', 'Valid'], loc='upper right')
     plt.savefig('figures/autoencoder_loss_curve.png', bbox_inches='tight')
 
     # To visualize encoded and decoded samples after training
     # autoencoder.load_weights('models/autoencoder_weights.h5')
     # plotSingleDecodedNoiseSample(decoder)
     # plotDecodedSamples(decoder)
-    # plot_encoded_decoded_samples(encoder, decoder, X_test)
+    # plot_encoded_decoded_samples(encoder, decoder, X_valid)
 
 if __name__ == '__main__':
     main()
