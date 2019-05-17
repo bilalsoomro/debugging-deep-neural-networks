@@ -231,7 +231,7 @@ def max_noise_samples_classifier(original_model, classes):
         samples_maximized = 0
 
         # Stop when we maximize 3 samples successfully
-        while samples_maximized < 1:
+        while samples_maximized < 3:
             print('Trying to maximize noise to class:', classes[class_idx])
             timestamp = str(int(time.time()))
             # Generate random gaussian noise
@@ -296,7 +296,7 @@ def max_test_samples_classifier(original_model, classes):
         samples_maximized = 0
 
         # Stop when we maximize 3 samples successfully
-        while samples_maximized < 1:
+        while samples_maximized < 3:
             timestamp = str(int(time.time()))
             
             # Pick sample from test set
@@ -306,7 +306,7 @@ def max_test_samples_classifier(original_model, classes):
             original_input = X_test[idx]
             original_input = original_input.reshape(1, 90, 80, 1)
 
-            # Calculate accuracy of noise input
+            # Calculate accuracy of original input
             orig_scores = original_model.predict(original_input)
 
             # Perform activation maximization
@@ -355,7 +355,7 @@ def max_noise_samples_classifier_decoder(combined_model, decoder_model, classes)
         samples_maximized = 0
 
         # Stop when we maximize 3 samples successfully
-        while samples_maximized < 1:
+        while samples_maximized < 3:
             print('Trying to maximize noise to class:', classes[class_idx])
             timestamp = str(int(time.time()))
             # Generate random gaussian noise
@@ -426,14 +426,8 @@ def max_test_samples_classifier_decoder(combined_model, decoder_model, classes):
         loss_grads = get_loss_and_gradients(combined_model, class_idx)
         samples_maximized = 0
 
-        attemps = 0
         # Stop when we maximize 3 samples successfully
-        while samples_maximized < 1:
-            if attemps == 5:
-                print('Could not maximize test sample from class ', classes[class_idx])
-                print('Skipping to next class')
-                break
-
+        while samples_maximized < 3:
             timestamp = str(int(time.time()))
             
             idx = np.random.choice(test_samples_indices)
@@ -447,6 +441,8 @@ def max_test_samples_classifier_decoder(combined_model, decoder_model, classes):
 
             # Calculate accuracy of noise input
             orig_scores = combined_model.predict(original_input)
+            max_idx_orig = np.argmax(orig_scores[0])
+            print('Predicted originally as:', max_idx_orig)
             
             # Perform activation maximization
             maximized_input, gradients = maximizeInput(loss_grads, original_input, 0.1)
@@ -455,11 +451,8 @@ def max_test_samples_classifier_decoder(combined_model, decoder_model, classes):
             maximized_input_decoded = decoder_model.predict(maximized_input)
 
             # Calculate accuracy of maximized input
-            new_scores = decoder_model.predict(maximized_input)
+            new_scores = combined_model.predict(maximized_input)
             max_pred_class = np.argmax(new_scores[0])
-
-            if max_pred_class != class_idx:
-                attemps += 1
 
             # if sample is successfully maximized to specificed class
             if max_pred_class == class_idx:
@@ -508,13 +501,13 @@ def main():
             os.makedirs(d)
 
     # Generate maximized features from noise using only classifier
-    # max_noise_samples_classifier(original_model, classes)
+    max_noise_samples_classifier(original_model, classes)
 
     # Generate maximized features from test samples using only classifier
-    # max_test_samples_classifier(original_model, classes)
+    max_test_samples_classifier(original_model, classes)
 
     # Generate maximized features from noise samples using combined classifier and decoder model
-    # max_noise_samples_classifier_decoder(combined_model, decoder_model, classes)
+    max_noise_samples_classifier_decoder(combined_model, decoder_model, classes)
 
     # Generate maximized features from test samples using combined classifier and decoder model
     max_test_samples_classifier_decoder(combined_model, decoder_model, classes)
