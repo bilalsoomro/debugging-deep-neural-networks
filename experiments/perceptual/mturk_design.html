@@ -1,0 +1,85 @@
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+
+<!-- You must include crowd-form so that your task successfully submit answers -->
+<crowd-form answer-format="flatten-objects">
+
+    <!-- The crowd-classifier element will create a tool for the Worker to select the 
+          correct answer to your question -->
+    <crowd-classifier 
+        categories="['Excellent - Completely clear speech', 'Good - Mostly clear speech', 'Fair - Equally clear and unclear speech', 'Poor - Mostly unclear speech', 'Bad - Completely unclear speech']"
+        header="How clear and audible is the word '${class_label}' in this recording?"
+        name="audio-naturalness">
+        
+            <classification-target>
+                <audio controls="" style="width: 100%">
+
+                    <!-- Your audio file URLs will be substituted for the "audio_url" variable 
+                          when you publish a batch with a CSV input file containing multiple 
+                          audio file URLs -->
+                    <source src="${audio_url}" type="audio/mpeg" />
+
+                </audio>
+            </classification-target>
+
+        <!-- Use the short-instructions section for quick instructions that the Worker
+              will see while working on the task. Including some basic examples of 
+              good and bad answers here can help get good results. You can include 
+              any HTML here. -->
+        <short-instructions>             
+            <p>
+              Listen to the sample of speech and assess the quality 
+              of the audio based on how clear the specified word can be heard in the recording.
+              Read the full instructions to get an idea of how to rate the recordings (samples provided).
+            </p>
+            For better results, wear headphones and work in a quiet environment.
+        </short-instructions>
+
+        <!-- Use the full-instructions section for more detailed instructions that the 
+              Worker can open while working on the task. Including more detailed 
+              instructions and additional examples of good and bad answers here can 
+              help get good results. You can include any HTML here. -->
+        <full-instructions>
+            <p>Listen to these examples to get an idea of how to rate:</p>
+            <p>Excellent - Completely clear speech of word "Eight"</p>
+            <audio controls="" style="width: 100%">
+                <!-- Your audio file URLs will be substituted for the "audio_url" variable 
+                      when you publish a batch with a CSV input file containing multiple 
+                      audio file URLs -->
+                <source src="url_to_dir/audio1.wav" type="audio/mpeg" />
+            </audio>
+            <!--<p>Good - Mostly audible speech - audio sample 2</p>-->
+            <p>Good - Mostly clear speech of word "Dog"</p>
+            <audio controls="" style="width: 100%">
+                <!-- Your audio file URLs will be substituted for the "audio_url" variable 
+                      when you publish a batch with a CSV input file containing multiple 
+                      audio file URLs -->
+                <source src="url_to_dir/audio2.wav" type="audio/mpeg" />
+            </audio>
+            <p>Fair - Equally clear and unclear speech of word "Right"</p>
+            <audio controls="" style="width: 100%">
+                <!-- Your audio file URLs will be substituted for the "audio_url" variable 
+                      when you publish a batch with a CSV input file containing multiple 
+                      audio file URLs -->
+                <source src="url_to_dir/audio3.wav" type="audio/mpeg" />
+            </audio>
+            <p>Poor - Mostly unclear speech of word "Visual"</p>
+            <audio controls="" style="width: 100%">
+                <!-- Your audio file URLs will be substituted for the "audio_url" variable 
+                      when you publish a batch with a CSV input file containing multiple 
+                      audio file URLs -->
+                <source src="url_to_dir/audio4.wav" type="audio/mpeg" />
+            </audio>
+            <p>Bad - Completely unclear speech of word "Sheila"</p>
+            <audio controls="" style="width: 100%">
+                <!-- Your audio file URLs will be substituted for the "audio_url" variable 
+                      when you publish a batch with a CSV input file containing multiple 
+                      audio file URLs -->
+                <source src="url_to_dir/audio5.wav" type="audio/mpeg" />
+            </audio>
+        </full-instructions> 
+    </crowd-classifier>
+</crowd-form>
