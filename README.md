@@ -1,5 +1,5 @@
 # Towards Debugging Deep Neural Networks by Generating Speech Utterances
-This repo contains the code for the paper "Toward Debugging Deep Neural Networks by Generating Speech Utterances"
+This repo contains the code for the paper "Towards Debugging Deep Neural Networks by Generating Speech Utterances"
 
 
 ## Main files:
@@ -14,7 +14,7 @@ Experiments folder contains the code used to perform objective evaluations, perc
 ### Objective evaluations
 - maximize_noise_classifier_10k.py - python script to maximize 10k noise samples to a class using the speech classifier
 - maximize_noise_decoder_10k.py - python script to maximize 10k noise samples to a class using the combined model of speech classifier and decoder(prior)
-- 10k_maximization_experiment.sh - bash script to run the experiments objective experiments
+- 10k_maximization_experiment.sh - bash script to run the objective experiments
 - noise_to_class_heatmaps.py - python script to visualize the results of the 10k noise samples maximization experiments
     - usage: python3 noise_to_class_heatmaps.py results/decoder classifier_heatmap.pdf
 
@@ -25,13 +25,15 @@ Experiments folder contains the code used to perform objective evaluations, perc
   - Decoder noise max (3 samples per class) = 3 x 35 = 105
   - Decoder test max (3 samples per class) = 3 x 35 = 105 x 2 (before & after) = 210
 
-- synthesize_audio.sh bash script to synthesize all audio files after running previous script
+- synthesize_audio.sh bash script to synthesize audio files using WaveNet vocoder
 - produce_csv.py - python script used to generate csv input file for MTurk
 - turk_analysis.py - python script used to visualize MTurk results and visualize results of the evaluations
     - Usage: python3 turk_analysis.py Batch_3584220_batch_results_updated.csv classes output.pdf
 
-### TSNE analysis
+### t-SNE analysis
 - prepare_data.py - python script to maximize encoded test samples to their respective class. It also gets which test samples are misclassified and extracts speaker_ids from the speech dataset.
 - latent_tsne.py - python script to generate visualizations on speaker and maximization effect
 
+## License
+Code original to this project is under MIT license. Code in the directory '/wavenet_vocoder' is included under MIT license by Ryuichi Yamamoto ([link](https://github.com/r9y9/wavenet_vocoder/blob/master/LICENSE.md)).
 
