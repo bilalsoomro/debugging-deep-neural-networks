@@ -1,5 +1,7 @@
 # Towards Debugging Deep Neural Networks by Generating Speech Utterances
-This repo contains the code for the paper "Towards Debugging Deep Neural Networks by Generating Speech Utterances"
+This repo contains the code for the paper "Towards Debugging Deep Neural Networks by Generating Speech Utterances".
+
+(https://arxiv.org/abs/1907.03164)
 
 
 ## Main files:
