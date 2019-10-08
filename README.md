@@ -36,6 +36,34 @@ Experiments folder contains the code used to perform objective evaluations, perc
 - prepare_data.py - python script to maximize encoded test samples to their respective class. It also gets which test samples are misclassified and extracts speaker_ids from the speech dataset.
 - latent_tsne.py - python script to generate visualizations on speaker and maximization effect
 
+### Generated Audio Samples
+- Maximizing using only trained Speech classifier
+    - Random noise to class "Yes" - [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553098532_maximized_feature_to_class_yes.npy.wav)
+    - Random noise to class "No" - [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553098197_maximized_feature_to_class_no.npy.wav)
+    - Random noise to class "Up" - [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553099828_maximized_feature_to_class_up.npy.wav)
+    - Random noise to class "Down" - [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553098022_maximized_feature_to_class_down.npy.wav)
+    - Random noise to class "Go" - [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553098926_maximized_feature_to_class_go.npy.wav)
+
+    - Class "On" - [WaveNet](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553113920_original_feature_of_class_on_to_class_on.npy.wav) -> [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553113920_maximized_feature_of_class_on_to_class_on.npy.wav)
+    - Class "Yes" - [WaveNet](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553115970_original_feature_of_class_yes_to_class_yes.npy.wav) -> [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553115970_maximized_feature_of_class_yes_to_class_yes.npy.wav)
+    - Class "Up" - [WaveNet](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553152951_original_feature_of_class_up_to_class_up.npy.wav) -> [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553152951_maximized_feature_of_class_up_to_class_up.npy.wav)
+    - Class "Stop" - [WaveNet](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553165449_original_feature_of_class_stop_to_class_stop.npy.wav) -> [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553165449_maximized_feature_of_class_stop_to_class_stop.npy.wav)
+    - Class "Tree" - [WaveNet](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553113407_original_feature_of_class_tree_to_class_tree.npy.wav) -> [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553113407_maximized_feature_of_class_tree_to_class_tree.npy.wav)
+
+- Maximizing using combined Speech classifier and decoder
+    - Random noise to class "Yes" - [link](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553351404_maximized_feature_to_class_yes.npy.wav)
+    - Random noise to class "No" - [link](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553351019_maximized_feature_to_class_no.npy.wav)
+    - Random noise to class "Up" - [link](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553352876_maximized_feature_to_class_up.npy.wav)
+    - Random noise to class "Down" - [link](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553350828_maximized_feature_to_class_down.npy.wav)
+    - Random noise to class "Go" - [link](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553351932_maximized_feature_to_class_go.npy.wav)
+
+    - Class "On" - [WaveNet](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553626531_original_feature_of_class_on_to_class_on.npy.wav) -> [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553626531_maximized_feature_of_class_on_to_class_on.npy.wav)
+    - Class "Yes" - [Wavenet](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553626541_original_feature_of_class_yes_to_class_yes.npy.wav) -> [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553626541_maximized_feature_of_class_yes_to_class_yes.npy.wav)
+    - Class "Up" - [WaveNet](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553626773_original_feature_of_class_up_to_class_up.npy.wav) -> [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553626773_maximized_feature_of_class_up_to_class_up.npy.wav)
+    - Class "Stop" - [WaveNet](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553626829_original_feature_of_class_stop_to_class_stop.npy.wav) -> [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553626829_maximized_feature_of_class_stop_to_class_stop.npy.wav)
+    - Class "Tree" - [WaveNet](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553626526_original_feature_of_class_tree_to_class_tree.npy.wav) -> [Maximized](http://cs.uef.fi/~anssk/audio_maximization/20180510_mixture_lj_checkpoint_step000320000_emasample_1553626526_maximized_feature_of_class_tree_to_class_tree.npy.wav)
+
+    
+
 ## License
 Code original to this project is under MIT license. Code in the directory '/wavenet_vocoder' is included under MIT license by Ryuichi Yamamoto ([link](https://github.com/r9y9/wavenet_vocoder/blob/master/LICENSE.md)).
-
